@@ -31,15 +31,28 @@ inline Vector3 operator-(const Vector3  &lhs, const Vector3 &rhs)
 {
     return Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z-rhs.z);
 }
+inline Vector3 operator-=( Vector3  &lhs, const Vector3 &rhs)
+{
+	return Vector3(lhs.x -= rhs.x, lhs.y -= rhs.y, lhs.z -= rhs.z);
+}
+
 
 inline Vector3 operator/(const Vector3 &lhs, float rhs)
 {
     return Vector3(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs);
 }
+inline Vector3 operator/=(Vector3  &lhs, const Vector3 &rhs)
+{
+	return Vector3(lhs.x /= rhs.x, lhs.y /= rhs.y, lhs.z /= rhs.z);
+}
 
 inline Vector3 operator*(const Vector3 &lhs, float rhs)
 {
     return{lhs.x*rhs,lhs.y*rhs,lhs.z*rhs };
+}
+inline Vector3 operator*=(Vector3  &lhs, const Vector3 &rhs)
+{
+	return Vector3(lhs.x *= rhs.x, lhs.y *= rhs.y, lhs.z *= rhs.z);
 }
 
 // Dot production tells us how much one vector extends
