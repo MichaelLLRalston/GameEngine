@@ -27,6 +27,9 @@ struct Vector3
 // Distance Between Vectors:
 //(A-B).magnitude()
 
+// Addition/subtractions/division/multiplication etc.. etc..
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
 inline Vector3 operator-(const Vector3  &lhs, const Vector3 &rhs)
 {
     return Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z-rhs.z);
@@ -35,7 +38,6 @@ inline Vector3 operator-=( Vector3  &lhs, const Vector3 &rhs)
 {
 	return Vector3(lhs.x -= rhs.x, lhs.y -= rhs.y, lhs.z -= rhs.z);
 }
-
 
 inline Vector3 operator/(const Vector3 &lhs, float rhs)
 {
@@ -55,11 +57,30 @@ inline Vector3 operator*=(Vector3  &lhs, const Vector3 &rhs)
 	return Vector3(lhs.x *= rhs.x, lhs.y *= rhs.y, lhs.z *= rhs.z);
 }
 
+inline Vector3 operator+(const Vector3  &lhs, const Vector3 &rhs)
+{
+	return Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + lhs.z);
+}
+inline Vector3 operator+=(Vector3  &lhs, const Vector3 &rhs)
+{
+	return Vector3(lhs.x += rhs.x, lhs.y += rhs.y, lhs.z += rhs.z);
+}
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Addition/subtractions/division/multiplication etc.. etc..
+
+
+
 // Dot production tells us how much one vector extends
 // in the direction of another vector
 inline float dot(const Vector3 &lhs, const Vector3 &rhs)
 {
     return lhs.x * rhs.x + rhs.y * lhs.y + rhs.z*lhs.z;
+}
+
+inline float cross(const Vector3 &lhs, const Vector3 &rhs)
+{
+	return lhs.y * rhs.z - lhs.z * rhs.y, lhs.z * rhs.x - lhs.x *rhs.z, lhs.x * rhs.y - lhs.y *lhs.x;
 }
 
 //#define EPSILON 0.0001f

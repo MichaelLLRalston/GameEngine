@@ -29,20 +29,47 @@ struct Vector4
 // Distance Between Vectors:
 //(A-B).magnitude()
 
+// Addition/subtractions/division/multiplication etc.. etc..
+//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
 inline Vector4 operator-(const Vector4  &lhs, const Vector4 &rhs)
 {
 	return Vector4(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.q - rhs.q);
+}
+inline Vector4 operator-=(Vector4  &lhs, const Vector4 &rhs)
+{
+	return Vector4(lhs.x -= rhs.x, lhs.y -= rhs.y, lhs.z -= rhs.z, lhs.q -= rhs.q);
 }
 
 inline Vector4 operator/(const Vector4 &lhs, float rhs)
 {
 	return Vector4(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.q / rhs);
 }
+inline Vector4 operator/=(Vector4  &lhs, const Vector4 &rhs)
+{
+	return Vector4(lhs.x /= rhs.x, lhs.y /= rhs.y, lhs.z /= rhs.z, lhs.q /= rhs.q);
+}
 
 inline Vector4 operator*(const Vector4 &lhs, float rhs)
 {
 	return{ lhs.x*rhs,lhs.y*rhs,lhs.z*rhs, lhs.q*rhs};
 }
+inline Vector4 operator*=(Vector4  &lhs, const Vector4 &rhs)
+{
+	return Vector4(lhs.x *= rhs.x, lhs.y *= rhs.y, lhs.z *= rhs.z, lhs.q *= rhs.q);
+}
+
+inline Vector4 operator+(const Vector4  &lhs, const Vector4 &rhs)
+{
+	return Vector4(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + lhs.z, lhs.q + rhs.q);
+}
+inline Vector4 operator+=(Vector4  &lhs, const Vector4 &rhs)
+{
+	return Vector4(lhs.x += rhs.x, lhs.y += rhs.y, lhs.z += rhs.z, lhs.q += rhs.q);
+}
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Addition/subtractions/division/multiplication etc.. etc..
 
 // Dot production tells us how much one vector extends
 // in the direction of another vector
