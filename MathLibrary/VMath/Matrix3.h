@@ -61,8 +61,54 @@ struct Matrix3
         r.m[2][1] = xy.y;
         return r;
     }
+
+
+
 };
 
+inline Matrix3 operator+(const Matrix3 &_A, const Matrix3 &_B)
+{
+	Matrix3 r;
+
+	r.c[0] = _A.c[0] + _B.c[0];
+	r.c[1] = _A.c[1] + _B.c[1];
+	r.c[2] = _A.c[2] + _B.c[2];
+
+	return r;
+}
+
+inline Matrix3 operator+=( Matrix3 &_A, const Matrix3 &_B)
+{
+	Matrix3 r;
+
+	r.c[0] = _A.c[0] += _B.c[0];
+	r.c[1] = _A.c[1] += _B.c[1];
+	r.c[2] = _A.c[2] += _B.c[2];
+
+	return r;
+}
+
+inline Matrix3 operator-(const Matrix3 &_A, const Matrix3 &_B)
+{
+	Matrix3 r;
+
+	r.c[0] = _A.c[0] - _B.c[0];
+	r.c[1] = _A.c[1] - _B.c[1];
+	r.c[2] = _A.c[2] - _B.c[2];
+
+	return r;
+}
+
+inline Matrix3 operator-=( Matrix3 &_A, const Matrix3 &_B)
+{
+	Matrix3 r;
+
+	r.c[0] = _A.c[0] -= _B.c[0];
+	r.c[1] = _A.c[1] -= _B.c[1];
+	r.c[2] = _A.c[2] -= _B.c[2];
+
+	return r;
+}
 
 inline Matrix3 operator*(const Matrix3 &_A, const Matrix3 &B)
 {
@@ -78,6 +124,22 @@ inline Matrix3 operator*(const Matrix3 &_A, const Matrix3 &B)
     r.c[2] = Vector3(dot(A.c[0], B.c[2]), dot(A.c[1], B.c[2]), dot(A.c[2], B.c[2]));
 
     return r;
+}
+
+inline Matrix3 operator*(const Matrix3 &_A, const Matrix3 &B)
+{
+	//A can now access rows as vector3
+	Matrix3 r, A = _A.transpose();
+
+	//for (size_t i = 0; i < 3; ++i)
+	//    r.c[i] = Vector3(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));
+
+	// Filling out columns for r here:
+	r.c[0] = Vector3(dotE(A.c[0], B.c[0]), dotE(A.c[1], B.c[0]), dotE(A.c[2], B.c[0]));
+	r.c[1] = Vector3(dotE(A.c[0], B.c[1]), dotE(A.c[1], B.c[1]), dotE(A.c[2], B.c[1]));
+	r.c[2] = Vector3(dotE(A.c[0], B.c[2]), dotE(A.c[1], B.c[2]), dotE(A.c[2], B.c[2]));
+
+	return r;
 }
 
 inline Vector3 operator*(const Matrix3 &_A, const Vector3 &b)

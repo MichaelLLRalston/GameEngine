@@ -75,7 +75,12 @@ inline Vector3 operator+=(Vector3  &lhs, const Vector3 &rhs)
 // in the direction of another vector
 inline float dot(const Vector3 &lhs, const Vector3 &rhs)
 {
-    return lhs.x * rhs.x + rhs.y * lhs.y + rhs.z*lhs.z;
+    return (lhs.x * rhs.x) + (rhs.y * lhs.y) + (rhs.z*lhs.z);
+}
+
+inline float dotE(Vector3 &lhs, const Vector3 &rhs)
+{
+	return (lhs.x *= rhs.x) + (lhs.y *= rhs.y) + (lhs.z *= rhs.z);
 }
 
 inline float cross(const Vector3 &lhs, const Vector3 &rhs)
