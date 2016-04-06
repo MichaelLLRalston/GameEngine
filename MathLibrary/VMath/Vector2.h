@@ -102,12 +102,12 @@ inline float dot(const Vector2 &lhs, const Vector2 &rhs)
 inline bool operator==(const Vector2 &lhs, const Vector2 &rhs)
 {
     // return lhs.x == rhs.x && lhs.y == rhs.y;
-    return
-    rhs.x - FLT_EPSILON < lhs.x && lhs.x < rhs.x + FLT_EPSILON &&
-    rhs.y - FLT_EPSILON < lhs.y && lhs.y < rhs.y + FLT_EPSILON;
+    //return
+    //rhs.x - FLT_EPSILON < lhs.x && lhs.x < rhs.x + FLT_EPSILON &&
+    //rhs.y - FLT_EPSILON < lhs.y && lhs.y < rhs.y + FLT_EPSILON;
 
-    //return fabsf(rhs.x - lhs.x) < FLT_EPSILON &&
-    //       fabsf(rhs.y - lhs.y) < FLT_EPSILON;
+    return fabsf(rhs.x - lhs.x) < FLT_EPSILON &&
+           fabsf(rhs.y - lhs.y) < FLT_EPSILON;
 }
 
 inline Vector2 normal(const Vector2 &a)

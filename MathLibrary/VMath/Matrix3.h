@@ -1,6 +1,8 @@
 #pragma once
 #include "Vector3.h"
 #include "Vector2.h"
+#include <iostream>
+using namespace std;
 
 struct Matrix3
 {
@@ -17,16 +19,48 @@ struct Matrix3
 
     Matrix3 transpose() const
     {
-        Matrix3 r;
+       /* Matrix3 r;
         r.c[0] = Vector3(m[0][0], m[1][0], m[2][0]);
         r.c[1] = Vector3(m[0][1], m[1][1], m[2][1]);
         r.c[2] = Vector3(m[0][2], m[1][2], m[2][2]);
-        return r;
+        return r;*/
+
+		Matrix3 r = *this;
+
+		for (int a = 0; a < 3; a++)
+		{
+			for (int b = 0; b < 3; b++)
+			{
+				if (a > b)
+				{
+					float save = r.m[b][a];
+					r.m[b][a] = r.m[a][b];
+					r.m[a][b] = save;
+				}
+			}
+		}
+
+		return r;
     }
     
-    float determinant();
+	float determinant()
+	{
+		Matrix3 r;
+		*this = transpose();
+		r.m[0][0] = (r.m[0][0] * ((r.m[1][1] * r.m[2][2]) - (r.m[2][1] * r.m[1][2])));
+		r.m[1][0] = (r.m[1][0] * ((r.m[0][1] * r.m[2][2]) - (r.m[2][1] * r.m[0][2])));
+		r.m[2][0] = (r.m[2][0] * ((r.m[0][1] * r.m[1][2]) - (r.m[1][1] * r.m[0][2])));
+
+		
+
+		return r.m[0][0] - r.m[1][0] + r.m[2][0];
+
+
+		//return ((r.m[0][0] * ((r.m[1][1] * r.m[2][2]) - (r.m[2][1] * r.m[1][2]))) - (r.m[1][0] * ((r.m[0][1] * r.m[2][2]) - (r.m[2][1] * r.m[0][2]))) + (r.m[2][0] * ((r.m[0][1]) * r.m[1][2]) - (r.m[1][1] * r.m[0][2])));
+	}
 
     Matrix3 inverse();
+
 
     static Matrix3 identity()
     {
@@ -61,6 +95,20 @@ struct Matrix3
         r.m[2][1] = xy.y;
         return r;
     }
+
+	
+	void print()
+	{
+		for (int a = 0; a < 3; a++)
+		{
+			for (int b = 0; b < 3; b++)
+			{
+				cout << m[b][a] << " ";
+			}
+			cout << endl;
+		}
+	}
+
 
 
 
@@ -124,22 +172,6 @@ inline Matrix3 operator*(const Matrix3 &_A, const Matrix3 &B)
     r.c[2] = Vector3(dot(A.c[0], B.c[2]), dot(A.c[1], B.c[2]), dot(A.c[2], B.c[2]));
 
     return r;
-}
-
-inline Matrix3 operator*(const Matrix3 &_A, const Matrix3 &B)
-{
-	//A can now access rows as vector3
-	Matrix3 r, A = _A.transpose();
-
-	//for (size_t i = 0; i < 3; ++i)
-	//    r.c[i] = Vector3(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));
-
-	// Filling out columns for r here:
-	r.c[0] = Vector3(dotE(A.c[0], B.c[0]), dotE(A.c[1], B.c[0]), dotE(A.c[2], B.c[0]));
-	r.c[1] = Vector3(dotE(A.c[0], B.c[1]), dotE(A.c[1], B.c[1]), dotE(A.c[2], B.c[1]));
-	r.c[2] = Vector3(dotE(A.c[0], B.c[2]), dotE(A.c[1], B.c[2]), dotE(A.c[2], B.c[2]));
-
-	return r;
 }
 
 inline Vector3 operator*(const Matrix3 &_A, const Vector3 &b)
